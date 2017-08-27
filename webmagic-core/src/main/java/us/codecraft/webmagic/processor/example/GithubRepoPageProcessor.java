@@ -10,6 +10,10 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * @since 0.3.2
  */
 public class GithubRepoPageProcessor implements PageProcessor {
+    @Override
+    public void setSpider(Spider spider) {
+
+    }
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000).setTimeOut(10000);
 

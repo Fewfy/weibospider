@@ -2,6 +2,7 @@ package us.codecraft.webmagic.processor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.Spider;
 
 /**
  * Interface to be implemented to customize a crawler.<br>
@@ -18,6 +19,7 @@ import us.codecraft.webmagic.Site;
  * @since 0.1.0
  */
 public interface PageProcessor {
+    public void setSpider(Spider spider);
 
     /**
      * process the page, extract urls to fetch, extract the data and store

@@ -10,7 +10,10 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * @since 0.6.0
  */
 public class ZhihuPageProcessor implements PageProcessor {
+    @Override
+    public void setSpider(Spider spider) {
 
+    }
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
 
     @Override

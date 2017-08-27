@@ -44,6 +44,11 @@ public class SimpleProxyProvider implements ProxyProvider {
     }
 
     @Override
+    public void removeProxy(Proxy proxy) {
+
+    }
+
+    @Override
     public Proxy getProxy(Task task) {
         return proxies.get(incrForLoop());
     }

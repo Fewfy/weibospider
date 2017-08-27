@@ -25,5 +25,7 @@ public interface ProxyProvider {
      * @return proxy 
      */
     Proxy getProxy(Task task);
+
+    void removeProxy(Proxy proxy);
     
 }

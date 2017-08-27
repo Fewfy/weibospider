@@ -2,6 +2,7 @@ package us.codecraft.webmagic.processor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.Spider;
 
 import java.util.List;
 
@@ -21,6 +22,11 @@ public class SimplePageProcessor implements PageProcessor {
         this.site = Site.me();
         //compile "*" expression to regex
         this.urlPattern = "(" + urlPattern.replace(".", "\\.").replace("*", "[^\"'#]*") + ")";
+
+    }
+
+    @Override
+    public void setSpider(Spider spider) {
 
     }
 

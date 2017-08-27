@@ -35,7 +35,7 @@ public abstract class HttpConstant {
 
         public static final String REFERER = "Referer";
 
-        public static final String USER_AGENT = "User-Agent";
+        public static final String USER_AGENT = "commentUser-Agent";
     }
 
 }

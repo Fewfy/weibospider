@@ -40,10 +40,19 @@ public class HttpClientDownloader extends AbstractDownloader {
     private HttpClientGenerator httpClientGenerator = new HttpClientGenerator();
 
     private HttpUriRequestConverter httpUriRequestConverter = new HttpUriRequestConverter();
-    
+
     private ProxyProvider proxyProvider;
 
     private boolean responseHeader = true;
+
+    private String spiderName = "Spider";
+
+    public HttpClientDownloader(String spiderName) {
+        this.spiderName = spiderName;
+    }
+
+    public HttpClientDownloader() {
+    }
 
     public void setHttpUriRequestConverter(HttpUriRequestConverter httpUriRequestConverter) {
         this.httpUriRequestConverter = httpUriRequestConverter;
@@ -51,6 +60,10 @@ public class HttpClientDownloader extends AbstractDownloader {
 
     public void setProxyProvider(ProxyProvider proxyProvider) {
         this.proxyProvider = proxyProvider;
+    }
+
+    public ProxyProvider getProxyProvider() {
+        return proxyProvider;
     }
 
     private CloseableHttpClient getHttpClient(Site site) {
@@ -84,11 +97,15 @@ public class HttpClientDownloader extends AbstractDownloader {
         try {
             httpResponse = httpClient.execute(requestContext.getHttpUriRequest(), requestContext.getHttpClientContext());
             page = handleResponse(request, task.getSite().getCharset(), httpResponse, task);
+            if (page.getStatusCode() == 403 || page.getStatusCode() == 414) {
+                proxyProvider.removeProxy(proxy);
+            }
             onSuccess(request);
-            logger.info("downloading page success {}", request.getUrl());
+            logger.info("{} downloading page success {}", spiderName, request.getUrl());
             return page;
         } catch (IOException e) {
-            logger.warn("download page {} error", request.getUrl(), e);
+            proxyProvider.removeProxy(proxy);
+            logger.warn("{} download page {} error {}", spiderName, request.getUrl(), e);
             onError(request);
             return page;
         } finally {
